@@ -8,15 +8,15 @@
   <link rel="dns-prefetch" href="www.stephentian.com">
   <title>StephenTian</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="coding之路">
+  <meta name="description" content="CodingRoad">
 <meta property="og:type" content="website">
 <meta property="og:title" content="StephenTian">
 <meta property="og:url" content="www.stephentian.com/index.html">
 <meta property="og:site_name" content="StephenTian">
-<meta property="og:description" content="coding之路">
+<meta property="og:description" content="CodingRoad">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="StephenTian">
-<meta name="twitter:description" content="coding之路">
+<meta name="twitter:description" content="CodingRoad">
   
     <link rel="alternative" href="/atom.xml" title="StephenTian" type="application/atom+xml">
   
@@ -149,6 +149,107 @@
           </div>
           <div id="js-content" class="content-ll">
             
+  
+    <article id="post-you-don-t-know-js-ES6" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/06/04/you-don-t-know-js-ES6/">上车！翻译《你不知道的JS(ES6)》</a>
+    </h1>
+  
+
+        
+        <a href="/2017/06/04/you-don-t-know-js-ES6/" class="archive-article-date">
+  	<time datetime="2017-06-04T15:14:37.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-06-04</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="第一章：ES的今与明"><a href="#第一章：ES的今与明" class="headerlink" title="第一章：ES的今与明"></a>第一章：ES的今与明</h2><p><em>在你想深入这本书之前，你应该对（在读此书时）JavaScript的最近标准掌握熟练，也就是</em>ES5<em>（专业来说是ES 5.1）。在此，我们决定全方面地谈论关于将近的 </em>ES6<em>，同时预见JS将会怎样发展。</em></p>
+<p>如果你对JavaScript不够自信，我极力推荐你先读一读本系列的其他话题：</p>
+<ul>
+<li><em>入门与进阶</em>：你是编程和JS的菜鸟吗？这部分是在你开始学习征途是需要的线路图。</li>
+<li><em>作用域与闭包</em>：你知道JS的词法作用域是基于编译器（不是解释器）语义的吗？你能解释闭包是如何成为词法作用域和函数作为值的直接结果的吗？</li>
+<li><em>this与对象原型</em>：你能列举<code>this</code>绑定的四个简单原则吗？你可曾在JS中用伪造“类”，而不是采取更简单的“行为委托”设计模式？你听过 <em>链接到其他对象的对象（<code>结链对象</code>）</em> （OOLO）吗？</li>
+<li><em>类型与语法</em>：你了解过JS中的内置类型吗？更关键是，你知道如何在类型之间正确且不出错地使用强制转换吗？你还对JS语法/句法的毫厘之差感到心安吗？</li>
+<li><em>异步与性能</em>：你还在使用回调函数处理你的异步性？你能说明<code>promise</code>是什么并且为何/如何解决了“回调地狱”的吗？你知道如何使用<code>generator</code>来提升异步代码的易读性吗？到底是什么构成了成熟优异的JS程序和独立操作？</li>
+</ul>
+<p>如果你已经读过了这些话题并且对它们涵盖的内容了然于胸，那此刻就让我们深入JS的进化过程来探索已初露端倪和更远的变化。</p>
+<p>与ES5不同，ES6不仅仅往JavaScript这门语言添加一套新API。它包含了大量的新的语法形式，其中的一些你可能会花上点时间才能适应。还有几种新的组织形式以及为各种数据类型添加的新API helper方法。</p>
+<p>对这门语言来说ES6十分激进。就算你自以为懂得ES5，ES6也满是 <em>你还未知晓</em> 新东西，那就准备好！这本书囊括了ES6中你需要立即掌握的重要主题，更有甚者是能预见你应该能意识到未来方向。</p>
+<p><strong>警告：</strong> 本书中的所有代码都模拟在ES6及以上的环境中运行。这次编写，不同的浏览器和JS环境（比如Node.js）对ES6的支持可能不同，由此你经历可能会丰富多样。</p>
+<h3 id="版本"><a href="#版本" class="headerlink" title="版本"></a>版本</h3><p>JavaScript标准官方名为“ECMAScript”（缩写为“ES”），并且直到最近才完全采用序列数来表示版本（例如，“5”代表“第五版”）。</p>
+<p>最早的版本，ES1和ES2，并不广为人知晓和使用。ES3是JavaScript第一次广泛传播的开端，并且构成了像IE6-8和早前的Android 2.x移动浏览器的JavaScript标准。由于一些超出我们讨论范围的政治原因，不幸的的ES4没有出现。</p>
+<p>在2009年，ES5正式定稿（之后是2011年的ES5.1），它在浏览器的现代革命和爆发性增长（比如Firefox，Chrome，Opera，Safari，和其他许多浏览器）中广泛传播，并作为JS标准确定下来。</p>
+<p>展望下一个版本的JS（从2013年过渡到2014年和之后的2015年），在讨论中显而易见的是ES6。</p>
+<p>然而，临近ES6规范发布时，有建议提及未来的版本号切换为编年制，比如用ES2016（同ES7）来指代在2016年末前被定稿的所有版本。有些人对此否定，相对于后来的ES2015来说，ES6更可能继续保持优势。然而，事实上ES2016可能预兆了新的编年制（将被使用）。</p>
+<p>还可以观察出JS进化的频率即使与一年一度为定版相比都要快得多。只要一个想法开始标准化讨论的进程，浏览器就开始为这种特性构建原型，而且早期的采用者就开始在代码中进行实验。</p>
+<p>通常在一个特性被官方承认之前，这些早期的引擎/工具的原型已经被标准化了。由此也可以认为未来的JS版本将是一个特性一个特性的更新，而非一组主要特性的随意集合的更新（就像现在这样），也不是每年更新（像可能将变成的那样）。</p>
+<p>总得来说就是版本号不再那么重要了，JavaScript开始变得更像一个万古长青的活标准。对待它的最佳方法是不再“基于ES6”来思考你的代码，而是按它支持的特性考虑。</p>
+<h3 id="转译"><a href="#转译" class="headerlink" title="转译"></a>转译</h3><p>特性的快速演变，给开发者们促使一个本来存在的问题恶化，他们热衷于立即使用新特性，而同时被被现实打脸，他们的网站/app需要支持那些不支持这些特性的老版本浏览器。</p>
+<p>在整个行业中ES5的方式似乎已经无力回天了，它典型的思维模式是，代码库会等至几乎所有的前ES5环境不能支持它们之后才开始采用ES5。其结果，就是许多人最近（在本书写作时）才开始采用<code>strict</code>模式这样的东西，而它早在五年前就在ES5中定稿了。</p>
+<p>业界普遍认为，等待和落后于语言规范那么多年，对JS生态系统是有害的。所有负责推动语言进化的人都期待这样的事情；只要新的特性和模式以规范的形式稳定下来，并且浏览器有机会实现它们，开发者就开始基于这些新的特性和模式进行编码。</p>
+<p>那么我们如何解决这个看似矛盾的问题呢？答案是工具化，特别是一种称为 <em>转译（transpiling）</em> 的技术（转换+编译）。大致上，它的理念是使用一种特殊的工具将你的ES6代码转换为可以在ES5环境中运行的等价物（甚至更近似的！）。</p>
+<p>举个栗子TvT，想一想简写属性定义（见第二章的“对象字面量扩展”）。以下是ES6的形式：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">var foo = [1,2,3];</div><div class="line">var obj = &#123;</div><div class="line">	foo		// 意指 `foo: foo`</div><div class="line">&#125;;</div><div class="line"></div><div class="line">obj.foo;	   // [1,2,3]</div></pre></td></tr></table></figure>
+<p>这（大致）是它如何转译的：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">var foo = [1,2,3];</div><div class="line">var obj = &#123;</div><div class="line">	foo: foo</div><div class="line">&#125;;</div><div class="line"></div><div class="line">obj.foo;	// [1,2,3]</div></pre></td></tr></table></figure>
+<p>这是一个小而愉悦的转换，（因为）它让我们在一个对象字面量声明中将<code>foo: foo</code>简写为<code>foo</code>，如果名称（属性名和属性值）相同的话。</p>
+<p>转译器为你执行这些转换，这个过程通常是构建工作流的一个步骤，这和你使用linting（检查代码），压缩等其他类似操作如出一辙。</p>
+<h3 id="Shim库-Polyfill库"><a href="#Shim库-Polyfill库" class="headerlink" title="Shim库/Polyfill库"></a>Shim库/Polyfill库</h3><p>不是所有的ES6新特性都需要转译器。可行的话，Polyfill（也叫shims）是一种模板，它为从一个新点的环境到旧点的环境中定义等效行为。语法不能被填补，但是API往往可以。</p>
+<p>比方说，<code>Object.is(..)</code>是一个用来检查两个值严格等价性的新功能，它不包括<code>===</code>对于<code>NaN</code>和<code>-0</code>值的那种微小差异的例外。为<code>Object.is(..)</code>使用Polyfill相当简单：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">if (!Object.is) &#123;</div><div class="line">	Object.is = function(v1, v2) &#123;</div><div class="line">		// 检查 `-0`</div><div class="line">		if (v1 === 0 &amp;&amp; v2 === 0) &#123;</div><div class="line">			return 1 / v1 === 1 / v2;</div><div class="line">		&#125;</div><div class="line">		// 检查 `NaN`</div><div class="line">		if (v1 !== v1) &#123;</div><div class="line">			return v2 !== v2;</div><div class="line">		&#125;</div><div class="line">		// 其他的所有情况</div><div class="line">		return v1 === v2;</div><div class="line">	&#125;;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><strong>提示</strong>：注意外层的<code>if</code>语句包围了填补（polyfill）的内容。这是一个重要的细节，它意味着这段代码段仅仅为了在考虑中的API还未被定义的老环境而定义的应变行为；你想要重写API的情况少之又少。</p>
+<p>这有一个被称为“ES6 Shim”（<a href="https://github.com/paulmillr/es6-shim/）的很棒的ES6填补（ES6" target="_blank" rel="external">https://github.com/paulmillr/es6-shim/）的很棒的ES6填补（ES6</a> shim库）合集，你绝对会在所有新JS项目中把它作为标准组成部分来采用！</p>
+<p>看起来JS将会维持持续发展（状态），同时浏览器也会持续地推出来支持新特性，而不是洪水般地更新。所以现代化的最佳策略就是在你的代码库中引入填补（polyfill库），并在你的构建流程中引入转译步骤，现在就开始习惯新的现实。</p>
+<p>如果你决定保持现状，等到所有不支持新特性的浏览器都消失才开始使用新特性，那么你将一直落后于时代。你将遗憾地错过为使编写JavaScript更有效，更高效，而且更健壮而设计的改革。</p>
+<h3 id="温故"><a href="#温故" class="headerlink" title="温故"></a>温故</h3><p>ES6（有人可能会称之为ES2015）在本书写作时刚刚落地，它包含许多你需要学习的新东西！</p>
+<p>但更重要的是，它将使你的思维模式与JavaScript新的进化方式一致。不再像以前许多人做的那样为了某些官方文档投票通过而苦等许多年。</p>
+<p>现在，JavaScript新特性一旦准备好就会登陆浏览器，由你来决定是否现在就搭上早班车，还是年年去玩儿代价不菲的追车游戏。</p>
+<p>无论未来的JavaScript采用什么样的标记，它都将会以比以前更快的速度前进。为使你保持在这门语言前进方向上的最前列，转译和填补是关键的工具。</p>
+<p>如果任何关于理解JavaScript新现状有重要的叙述，那便让所有的JS开发者都热诚于从尾部移动到领头的部分。而学习ES6就是这一切的起源！</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">ES6</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/06/04/you-don-t-know-js-ES6/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
   
     <article id="post-hello-world" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
@@ -292,6 +393,10 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
             <input type="checkbox" q-on="click:toggleTag(e)" q-attr="checked:showTags">
           </label>
           <ul class="article-tag-list" q-show="showTags">
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">ES6</a>
+              </li>
             
             <div class="clearfix"></div>
           </ul>
@@ -341,7 +446,7 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
     
     	<section class="tools-section tools-section-me" q-show="aboutme">
   	  	
-  	  		<div class="aboutme-wrap" id="js-aboutme">StephenTian,&lt;br&gt; 田热&lt;br&gt; 东华理工大学14级</div>
+  	  		<div class="aboutme-wrap" id="js-aboutme">田热&lt;br&gt; 江西赣州&lt;br&gt; 东华理工大学&lt;br&gt; 网名：codinghot</div>
   	  	
     	</section>
     

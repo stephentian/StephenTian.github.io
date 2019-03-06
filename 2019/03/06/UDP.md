@@ -1,5 +1,5 @@
 ## UDP
-> user data protocol(用户传输协议)
+> User Datagram protocol(用户数据报协议)
 
 
 #### 面向无连接

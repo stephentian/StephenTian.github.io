@@ -32,4 +32,26 @@ module.exports = {
 }
 ```
 
-![config 配置图](./config.png)
+### 4. 请求数据
+
+在项目需要请求数据的组件里, 添加请求方法, 请求数据
+
+```
+import axios from 'axios'
+
+export default {
+  data() {
+    return {}
+  },
+  mounted() {
+    this.getTest1()
+  },
+  methods: {
+    getTest1() {
+      axios.get('/api/test1').then((res) => {
+        console.log(res)
+      })
+    },
+  },
+}
+```

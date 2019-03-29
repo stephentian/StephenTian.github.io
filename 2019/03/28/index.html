@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>createElement</title>
+</head>
+
+<body>
+  <div id="app">app</div>
+  <script>
+    let attrs = {
+      id: 'aaa',
+      className: 'bab',
+      width: '100',
+      display: false,
+      fontSize: ''
+    }
+    let attrName
+    let i = 0
+    for (attrName in attrs) {
+      i++
+      console.log(`第 ${i} 次`)
+      console.log('所有 key in attrs', attrName)
+      // if (attrs.hasOwnProperty(attrName)) {
+      //   console.log('attrName', attrName)
+      //   console.log('attrs[attrNam]', attrs[attrName])
+      // }
+    }
+    console.log('hasOwnProperty', 'hasOwnProperty' in attrs)
+  </script>
+</body>
+
+</html>

@@ -17,7 +17,10 @@ function createElement(vnode) {
   }
   const elem = document.createElement(tag)
   let attrName
+  // key in obj
+  // 判断一个对象属性或原型里是否包含某个 key, key 为字符串
   for (attrName in attrs) {
+    // attrName 可能把原型里的属性也遍历了, hasOwnProperty 过滤, 它只会判断对象属性是否包含某个 key
     if (attrs.hasOwnProperty(attrName)) {
       elem.setAttribute(attrName, attrs[attrName])
     }
@@ -47,7 +50,12 @@ function updateChildren(vnode, newVnode) {
 }
 
 function replaceNode(vnode, newVnode) {
-  const elem = vnode.elem
-  const newElem = createElement(newVnode)
-  return elem
+  // ...
 }
+
+// 不仅仅是以上判断
+// - 节点的新增和删除
+// - 节点的重新排序
+// - 节点的属性、样式、事件变化
+// - 如何极致压榨性能
+// ...

@@ -63,5 +63,11 @@ React,createElement("div", null,
   React.createElement("img", { src: "", className: "profile" }),
   React.createElement("h3", null, [user.firstName, user.lastName].join(" "))
 )
+```
+
+```
+// React.createElement()
+React.createElement("div", { id: "" }, child1, child2, child3)
+React.createElement("div", { id: "" }, [...])
 
 ```

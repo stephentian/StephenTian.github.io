@@ -14,6 +14,8 @@ vdom 转换为 vnode 时, 依靠 h 函数, 再用 patch 渲染
 
 ## React.createElement 和 h
 
+h 函数和 React.createElement 本质一样的, 生成一个 vnode
+
 ```
 var profile = React.createElement("div", null, 
   React.createElement("img", { src: '', className: '' }),
@@ -24,6 +26,31 @@ var vnode = h('div#container.two.classes', { on: {click: someFn}}, [
   h('span', {style: {fontWeight: 'bold'}}, 'this is bold'),
   h('a', {props: {href: '/foo'}}, 'I\'ll take you places!')
 ])
+```
+
+vnode:
+```
+{
+  tag: 'div',
+  attrs: {},
+  children: [
+    {
+      tag: 'img',
+      attrs: {
+        src: '',
+        className: 'profile
+      },
+      children: []
+    },
+    {
+      tag: 'h3',
+      attrs: {},
+      children: [
+        user.firstName, user.lastName].join(" ")
+      ]
+    }
+  ]
+}
 ```
 
 ## 何时 patch

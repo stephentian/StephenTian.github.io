@@ -16,7 +16,9 @@
 
 var lengthOfLongestSubstring = function (s) {
   // const strArr = s.split('')
-  // const arr = []
+  // let long = null
+  // let i = 0
+  // let j = 1
 
   // function isRepeat(arr) {
   //   let hash = {}
@@ -29,65 +31,33 @@ var lengthOfLongestSubstring = function (s) {
   //   return false
   // }
 
-  // // 情况3
-  // if (!isRepeat(strArr)) {
-  //   return strArr.length
-  // }
-  // function getArr(arr) {
-
-  // }
-  // for (let i = 0; i < strArr.length; i++) {
-  //   for (let j = i + 1; j < strArr.length; j++) {
-  //     if (strArr[i] == strArr[j]) {
-  //       const childArr = strArr.slice(i, j)
-  //       if (isRepeat(childArr)) {
-  //         break
-  //       } else {
-  //         arr.push(childArr)
-  //         break
-  //       }
-  //     }
-  //     else {
-  //       if (j == strArr.length - 1) {
-  //         if (isRepeat(strArr.slice(i))) {
-  //           if (i == 0 && !isRepeat(strArr.slice(i, j))) {
-  //             arr.push(strArr.slice(i, j))
-  //           }
-  //           break
-  //         } else {
-  //           arr.push(strArr.slice(i))
-  //           break
-  //         }
-  //       }
-  //     }
+  // while (j <= strArr.length) {
+  //   if (!isRepeat(strArr.slice(i, j))) {
+  //     j - i > long ? long = j - i : null;
+  //     j++
+  //   } else {
+  //     i++
   //   }
   // }
 
-  // if (arr.length == 0) {
-  //   return strArr.length
-  // }
-  // arr.sort((a, b) => {
-  //   return b.length - a.length
-  // })
+  // console.log(long)
+  // return long
 
-  // console.log(arr)
-  // return arr[0].length
-  const map = {};
-  var left = 0;
 
-  const long = s.split('').reduce((max, v, i) => {
-    // console.log('max:', max)
-    console.log('v: ', map[v])
-    left = map[v] >= left ? map[v] + 1 : left;
-    map[v] = i;
-    return Math.max(max, i - left + 1);
-  }, 0);
-  console.log(map)
-  console.log(long)
-  return long
+  // 方法 2
+  // const map = {};
+  // var left = 0;
+
+  // const long = s.split('').reduce((max, v, i) => {
+  //   left = map[v] >= left ? map[v] + 1 : left;
+  //   map[v] = i;
+  //   return Math.max(max, i - left + 1);
+  // }, 0);
+  // return long
+
 }
 
 // lengthOfLongestSubstring('abacadvjeismqlgka')
-lengthOfLongestSubstring('aab')
+// lengthOfLongestSubstring('aab')
 // lengthOfLongestSubstring("cbb")
-// lengthOfLongestSubstring("abcabcbb")
+lengthOfLongestSubstring("")

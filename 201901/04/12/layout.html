@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>两栏布局, 中间自适应</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    html,
+    body {
+      width: 100%;
+      height: 100%;
+    }
+
+    .clearfix {
+      content: "";
+      clear: both;
+    }
+
+    #page {
+      width: 100%;
+      height: 100%;
+    }
+
+    /* 1 */
+    /* float */
+    /* .content-left {
+      background-color: #b3c0d1;
+      height: 100%;
+      width: 200px;
+      margin-right: -100%;
+      float: left;
+      color: #000000;
+    }
+
+    .content-main {
+      background: #ddd;
+      color: #000000;
+      height: 100%;
+      width: auto;
+      float: left;
+    }
+
+    .content-right {
+      background-color: #b3c0d1;
+      height: 100%;
+      width: 200px;
+      float: left;
+      color: #312626;
+    } */
+
+    /* 2 */
+    /* flex */
+
+  </style>
+</head>
+
+<body>
+  <div id="page">
+    <div class="content-left">left</div>
+    <div class="content-main">main</div>
+    <div class="content-right">right</div>
+  </div>
+</body>
+
+</html>

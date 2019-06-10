@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>jQuery 实现数据变化</title>
+</head>
+
+<body>
+  <div id="container">
+  </div>
+  <button id="btn-change">change</button>
+  <!-- <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+  <script src="./jquerydom.js"></script> -->
+  <script src="https://cdn.bootcss.com/snabbdom/0.7.3/snabbdom.js"></script>
+  <script src="https://cdn.bootcss.com/snabbdom/0.7.3/snabbdom-style.js"></script>
+  <script src="https://cdn.bootcss.com/snabbdom/0.7.3/snabbdom-props.js"></script>
+  <script src="https://cdn.bootcss.com/snabbdom/0.7.3/snabbdom-eventlisteners.js"></script>
+  <script src="https://cdn.bootcss.com/snabbdom/0.7.3/snabbdom-class.js"></script>
+  <script src="https://cdn.bootcss.com/snabbdom/0.7.3/h.js"></script>
+  <script src="./vnode.js"></script>
+  <!-- <script>
+    var container = document.getElementById('container')
+    var snabbdom = window.snabbdom
+
+    // 定义 patch
+    var patch = snabbdom.init([
+      snabbdom_class,
+      snabbdom_props,
+      snabbdom_style,
+      snabbdom_eventlisteners
+    ])
+
+    // 定义 h
+    var h = snabbdom.h
+
+    // 生成 vnode
+    var vnode = h('ul#list', {}, [
+      h('li.item', {}, 'item 1'),
+      h('li.item', {}, 'item 2')
+    ])
+    patch(container, vnode)
+
+    // 模拟修改情况
+
+    document.getElementById('btn-change').addEventListener('click', function () {
+      // 生成 newVnode
+      var newVnode = h('ul#list', {}, [
+        h('li.item', {}, 'item 1'),
+        h('li.item', {}, 'item B'),
+        h('li.item', {}, 'item 3')
+      ])
+      patch(vnode, newVnode)
+      // item 1 所在 li 不闪烁, 说明没有重新渲染.
+    })
+  </script> -->
+</body>
+
+</html>

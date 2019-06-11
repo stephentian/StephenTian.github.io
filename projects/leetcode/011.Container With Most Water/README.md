@@ -20,6 +20,10 @@
 执行用时 :2012 ms, 在所有JavaScript提交中击败了7.00%的用户
 内存消耗 :36.1 MB, 在所有JavaScript提交中击败了9.39%的用户
 
+- leetcode
+Runtime: 1432 ms, faster than 5.02% of JavaScript online submissions for Container With Most Water.
+Memory Usage: 36.5 MB, less than 5.47% of JavaScript online submissions for Container With Most Water
+
 ```
 var maxArea = function(height) {
     if (height.length < 2) reutrn
@@ -36,6 +40,28 @@ var maxArea = function(height) {
         }
     }
     console.log(maxNum)
+    return maxNum
+};
+```
+
+#### Answer 2
+
+- leetcode-cn
+
+执行用时 :80 ms, 在所有JavaScript提交中击败了97.95%的用户
+内存消耗 :35.5 MB, 在所有JavaScript提交中击败了54.33%的用户
+
+```
+var maxArea = function(height) {
+    let maxNum = 0, i = 0, j = height.length - 1
+    while(i < j) {
+        maxNum = Math.max(maxNum, Math.min(height[i],height[j]) * (j-i))
+        if (height[i] <= height[j]) {
+            i ++
+        } else {
+            j --
+        }
+    }
     return maxNum
 };
 ```

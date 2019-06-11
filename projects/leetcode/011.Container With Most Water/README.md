@@ -51,6 +51,11 @@ var maxArea = function(height) {
 执行用时 :80 ms, 在所有JavaScript提交中击败了97.95%的用户
 内存消耗 :35.5 MB, 在所有JavaScript提交中击败了54.33%的用户
 
+- leetcode
+
+Runtime: 52 ms, faster than 98.20% of JavaScript online submissions for Container With Most Water.
+Memory Usage: 35.3 MB, less than 98.14% of JavaScript online submissions for Container With Most Water.
+
 ```
 var maxArea = function(height) {
     let maxNum = 0, i = 0, j = height.length - 1

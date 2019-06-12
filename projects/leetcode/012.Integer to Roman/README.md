@@ -1,6 +1,6 @@
-# 整数转罗马数字
+# 整数转罗马数字(Integer to Roman)
 
-## Detail 描述
+## 描述 Detail
 
 罗马数字包含以下七种字符： I， V， X， L，C，D 和 M。
 
@@ -25,7 +25,7 @@ C 可以放在 D (500) 和 M (1000) 的左边，来表示 400 和 900。
 给定一个整数，将其转为罗马数字。输入确保在 1 到 3999 的范围内。
 
 
-## Answers
+## 答案 Answers
 
 #### answer 1
 
@@ -90,6 +90,28 @@ var intToRoman = function(num) {
 ```
 
 
-#### 2
+#### answer 2
 
 - leetcode-cn
+执行用时 :212 ms, 在所有JavaScript提交中击败了98.36%的用户
+内存消耗 :40.4 MB, 在所有JavaScript提交中击败了74.07%的用户
+
+```
+var intToRoman = function(num) {
+    let hash = [
+        ['', 'I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX'],
+        ['', 'X', 'XX', 'XXX', 'XL', 'L', 'LX', 'LXX', 'LXXX', 'XC'],
+        ['', 'C', 'CC', 'CCC', 'CD', 'D', 'DC', 'DCC', 'DCCC', 'CM'],
+        ['', 'M', 'MM', 'MMM']
+    ];
+    let result = '';
+    let counter = 0;
+    while (num > 0) {
+        result = hash[counter][num % 10] + result;
+        num = Math.floor(num / 10);
+        counter++
+    }
+    
+    return result;
+};
+```

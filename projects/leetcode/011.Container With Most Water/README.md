@@ -12,7 +12,7 @@
 ```
 
 
-## Solution
+## Answer
 
 #### Answer 1
 
@@ -29,8 +29,8 @@ var maxArea = function(height) {
     if (height.length < 2) reutrn
     let maxNum = 0
     let num = 0
-    for(let i = 0; i < height.length - 1 ; i ++){
-        for(let j = 1; j < height.length; j ++){
+    for(let i = 0; i < height.length; i ++){
+        for(let j = i + 1; j < height.length; j ++){
             if(height[i] <= height[j]) {
                 num = height[i]*(j - i)
             } else {
@@ -70,3 +70,21 @@ var maxArea = function(height) {
     return maxNum
 };
 ```
+
+
+## Solution
+
+#### 1.暴力法
+
+使用两个 for 循环,
+时间复杂度: O(n^2), 计算所有 n(n-1)/2 种高度组合
+空间复杂度: O(1), 使用恒定的额外空间
+
+
+#### 2. 双指针法
+
+**算法思路**
+
+这种方法背后的思路在于，两线段之间形成的区域总是会受到其中较短那条长度的限制。此外，两线段距离越远，得到的面积就越大。
+我们在数组中使用两个指针, 一个放在开始， 一个放在末尾。
+将指针指向较短的指针向较长的那段移动。

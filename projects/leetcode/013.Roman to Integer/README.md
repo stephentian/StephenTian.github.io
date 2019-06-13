@@ -72,11 +72,34 @@ var romanToInt = function(s) {
 
 
 
-#### answer 2
+#### Answer-2
 
 - leetcode-cn
-
+执行用时 :252 ms, 在所有JavaScript提交中击败了84.78%的用户
+内存消耗 :39.3 MB, 在所有JavaScript提交中击败了97.15%的用户
 
 ```
+var romanToInt = function(s) {
+    let map = {
+        'M' : 1000,
+        'D' : 500,
+        'C' : 100,
+        'L' : 50,
+        'X' : 10,
+        'V' : 5,
+        'I' : 1,
+    }
+    let result = 0
 
+    for (i=0;i<s.length-1;i++){
+    if(map[s[i]] < map[s[i+1]]){
+      result -= map[s[i]]
+    } else{
+      result += map[s[i]]
+    }
+    }
+    result += map[s[s.length-1]]
+
+    return result
+};
 ```

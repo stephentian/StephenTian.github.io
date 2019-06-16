@@ -30,3 +30,7 @@ var longestCommonPrefix = function(strs) {
     return pre
 };
 ```
+
+
+#### Answer-2
+

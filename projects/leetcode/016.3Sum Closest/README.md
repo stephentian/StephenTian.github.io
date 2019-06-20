@@ -1,10 +1,10 @@
-# 最长公告前缀(Longest Common Prefix)
+# 最接近的三数之和(3Sum Closest)
 
 
 
 ## Solutions
 
-#### Answers
+#### Answers-1
 
 
 ```
@@ -36,5 +36,35 @@ var threeSumClosest = function(nums, target) {
     } while (x < len - 2 && nums[x] === nums[x - 1])
   }
   return min;
+};
+```
+
+
+#### Anwser-2
+
+leetcode-cn
+执行用时 :368 ms, 在所有 JavaScript 提交中击败了6.42%的用户
+内存消耗 :34.7 MB, 在所有 JavaScript 提交中击败了86.88%的用户
+
+```
+暴力法
+var threeSumClosest = function(nums, target) {
+    let res = null
+    let sum = 0
+    let len = nums.length
+    if(len <= 2) {
+        return nums
+    }
+    for(i = 0; i < len-2;i++){
+        for(j=i+1; j < len-1; j++) {
+            for(k = j+1; k < len; k++) {
+                sum = nums[i] + nums[j] + nums[k]
+                if (res === null || Math.abs(target - res) >=  Math.abs(target - sum)) {
+                    res = sum
+                }
+            }
+        }
+    }
+    return res
 };
 ```

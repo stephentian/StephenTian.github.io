@@ -6,6 +6,8 @@
 
 #### Answers-1
 
+执行用时 :120 ms, 在所有 JavaScript 提交中击败了63.94%的用户
+内存消耗 :34.8 MB, 在所有 JavaScript 提交中击败了75.11%的用户
 
 ```
 var threeSumClosest = function(nums, target) {
@@ -55,9 +57,9 @@ var threeSumClosest = function(nums, target) {
     if(len <= 2) {
         return nums
     }
-    for(i = 0; i < len-2;i++){
-        for(j=i+1; j < len-1; j++) {
-            for(k = j+1; k < len; k++) {
+    for(let i = 0; i < len-2;i++){
+        for(let j=i+1; j < len-1; j++) {
+            for(let k = j+1; k < len; k++) {
                 sum = nums[i] + nums[j] + nums[k]
                 if (res === null || Math.abs(target - res) >=  Math.abs(target - sum)) {
                     res = sum

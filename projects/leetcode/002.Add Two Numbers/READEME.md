@@ -102,17 +102,17 @@ var addTwoNumbers = function(l1, l2) {
     }
     //将返回的数字转成链表
     var result=addArray(arr1,arr2);
-    var node={
-        val:null,
-        next:null
+    var node = {
+        val: null,
+        next: null
     },
         head=node;
     for(i=0;i<result.length;i++){
         node.next={
-            val:result[i],
-            next:null
+            val: result[i],
+            next: null
         }
-        node=node.next;
+        node = node.next;
     }
     return head.next;  
 };

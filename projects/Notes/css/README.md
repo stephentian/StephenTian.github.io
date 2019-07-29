@@ -2,7 +2,7 @@
 
 ## 布局
 
-### 三栏布局
+#### 三栏布局
 
 1.假设高度已知，请写出三栏布局，其中左栏、右栏宽度各为 300 px, 中间自适应
 
@@ -41,6 +41,7 @@
   top: 0;
   right: 0;
 }
+```
 
 (3) flexbox 弹性布局
 ```
@@ -97,3 +98,97 @@
   background: #0ff;
 }
 ```
+
+
+## 盒模型
+
+#### 基本概念
+
+content, padding, border, margin
+
+#### 两种模型及区别
+
+标准模型
+width = content
+
+IE 模型
+width = content + padding + border
+
+#### CSS 如何设置这两种模型
+
+box-sizing: content-box;
+
+box-sizing: border-box;
+
+#### JS 如何设置获取盒模型对应的宽和高
+
+设置 dom 元素的宽高样式 一般有三种方法：
+
+1. 内联样式
+2. style 标签
+3. 通过 link 标签引入(外联样式)
+
+获取 dom 元素宽高样式，有下列 4 种方法：
+一
+```
+dom.style.width/height
+
+// 只能获取 1， 即内联样式
+```
+二
+```
+dom.currentStyle.width/height
+
+// 获取1, 2, 3渲染后的宽高，但是仅 IE 支持
+```
+三
+```
+window.getComputedStyle(dom).width/height
+
+// 与2原理相似，但是兼容性好一些
+```
+四
+```
+dom.getBoundingClientRect().widht/height
+
+// 计算元素绝对位置（相对于视窗左上角），
+// 获取到四个元素left, top, width, height
+```
+
+#### 边距重叠
+
+1.父子元素边距重叠
+```
+<div class="parent">
+  <div class="child"></div>
+</div>
+
+.child {
+  width: 100%;
+  height: 100px;
+  margin-top: 10px;
+}
+
+// 父级元素 parent 高度多少？
+```
+
+
+#### BFC
+
+1.基本概念
+英文名, block formatting context, 块级格式化上下文.
+它是一个独立的渲染区域, 里面由块级元素组成.
+
+2.BFC的原理(渲染规则)
+(1) BFC
+(2) BFC 区域不会和 float 元素重叠
+(3) 
+(4) 
+
+3.如何创建 BFC
+(1)
+(2)
+(3)
+
+4.BFC 使用场景
+(1) 

@@ -1,6 +1,8 @@
 # 刷题笔记
 
-## 箭头函数
+## ES6 
+
+### 箭头函数
 
 下面代码输出什么？
 
@@ -31,6 +33,53 @@ B
 没有值radius属性，返回undefined。
 ```
 
+### 模板字符串
+
+#### 标签模板字符串
+
+下面代码的输出是什么?
+```
+function getPersonInfo(one, two, three) {
+  console.log(one);
+  console.log(two);
+  console.log(three);
+}
+
+const person = "Lydia";
+const age = 21;
+
+getPersonInfo`${person} is ${age} years old`;
+
+A: Lydia 21 ["", "is", "years old"]
+B: ["", "is", "years old"] Lydia 21
+C: Lydia ["", "is", "years old"] 21
+```
+
+答案：
+```
+B
+```
+
+解析：
+
+标签模板字符串是通过一个默认的函数(**标签函数**)对其中的插值进行运算和连接的。
+这个标签函数会在处理完字符串后，且还没有输出前调用，可以认为是模版字符串的回调函数，或者拦截器。
+标签函数第一个参数是一个数组，
+是字符串的字面量的一个数组，
+后面的参数是不定参数，一个参数代表一个表达式的计算结果
+
+举例：
+
+```
+function mytag(strings,...values){
+    console.log(strings);
+    console.log(values);
+}
+mytag`age is ${boy.age},country is ${boy.country}`;
+
+// output
+['age is', ',country is', '']
+```
 
 
 ## 函数也是对象

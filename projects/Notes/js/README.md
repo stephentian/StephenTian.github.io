@@ -1,4 +1,4 @@
-# 刷题笔记
+# JS
 
 ## ES6 
 
@@ -24,14 +24,12 @@ C: 20 and 63
 D: NaN and 63
 ```
 
-答案：
-```
-B
+答案：`B`
 
 对于箭头函数, this 指向它所在的上下文的环境, 与普通函数不同！
-这意味着当我们调用perimeter时，它不是指向shape对象，而是指其定义时的环境（window）。
-没有值radius属性，返回undefined。
-```
+这意味着当我们调用 perimeter 时，它不是指向 shape 对象，而是指其定义时的环境（window）。
+没有值 radius 属性，返回 undefined。
+
 
 ### 模板字符串
 
@@ -55,10 +53,7 @@ B: ["", "is", "years old"] Lydia 21
 C: Lydia ["", "is", "years old"] 21
 ```
 
-答案：
-```
-B
-```
+答案：`B`
 
 解析：
 
@@ -99,12 +94,9 @@ C: undefined
 D: ReferenceError
 ```
 
-答案：
-```
-A
+答案：`A`
 
 这在JavaScript中是可能的，因为函数也是对象！（原始类型之外的所有东西都是对象）
-```
 
 
 ## 变量类型隐式转换
@@ -124,16 +116,13 @@ C: "12"
 D: 3
 ```
 
-答案：
-```
-C
+答案：`C`
 
 JavaScript是一种动态类型语言：我们没有指定某些变量的类型。 在您不知情的情况下，值可以自动转换为另一种类型，称为隐式类型转换。 强制从一种类型转换为另一种类型。
 在让数字类型（1）和字符串类型（'2'）相加时，该数字被视为字符串。 我们可以连接像“Hello”+“World”这样的字符串，所以这里发生的是“1”+“2”返回“12”。
-```
 
 
-## 运算符
+## 表达式和运算符
 
 #### 运算符位置
 
@@ -150,15 +139,96 @@ C: 0 2 2
 D: 0 1 2
 ```
 
-答案：
-```
-C
-
-后缀一元运算符++：
+答案：`C`
+后缀一元运算符 i++：
 返回值（返回0）
 增加值（数字现在是1）
 
-前缀一元运算符++：
+前缀一元运算符 ++i：
 增加值（数字现在是2）
 返回值（返回2）
+
+#### 属性访问
+1.下面代码的输出是什么?
 ```
+const a = {};
+const b = { key: "b" };
+const c = { key: "c" };
+a[b] = 123;
+a[c] = 456;
+console.log(a[b]);
+
+A: 123
+B: 456
+C: undefined
+D: ReferenceError
+```
+答案：`B`
+对象键自动转换为字符串.
+将一个对象设置为对象 a 的键, 其值为 123.
+因为这个对象自动转换为字符串化时，它变成了 `[Object object]`.
+打印 `a[b]`, 它实际上是 `a["Object object"]`
+
+
+## DOM
+
+#### Event
+
+```
+event.preventDefault()  // 例如阻止链接跳转
+event.stopPropagation()
+event.stopImmediatePropagation()  // 阻止事件冒泡, 并且阻止之后相同事件的其他函数执行
+event.currentTarget() // 获取到的是发起事件的标签元素
+event.target()  // 获取的是触发事件的标签元素
+```
+
+#### 事件委托
+
+完美版，防止点击了子元素
+1.
+```
+let delegate = function(element, eventType, selector, fn) {
+  element.addEventListener(eventType, e => {
+    let el = e.target
+    while (!el.matches(selector)) {
+      el = el.parentNode
+      if(element === el) {
+        el = null
+        break
+      }
+    }
+    el && fn.call(el, e, el)
+  })
+  return element
+}
+```
+
+2.
+```
+var element = document.querySelector('.list')
+element.addEventListener('click', e => {
+  let el = e.target
+  while(el.tagName.toLowerCase() !== 'li') {
+    el = el.parent
+    if (el === element) {
+      el = null
+      break
+    }
+  }
+  el && console.log('点击了 xxx')
+})
+
+```
+
+1.事件模型
+
+#### 事件流
+
+三个阶段
+
+1.事件的捕获阶段
+```
+windiw --> document --> html --> body --> ... --> 目标元素
+```
+2.事件目标阶段
+3.事件冒泡阶段

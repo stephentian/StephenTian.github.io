@@ -232,3 +232,33 @@ windiw --> document --> html --> body --> ... --> 目标元素
 ```
 2.事件目标阶段
 3.事件冒泡阶段
+
+
+### try catch
+下面代码的输出是什么?
+```
+(() => {
+  let x, y;
+  try {
+    throw new Error();
+  } catch (x) {
+    (x = 1), (y = 2);
+    console.log(x);
+  }
+  console.log(x);
+  console.log(y);
+})();
+
+A: 1 undefined 2
+B: undefined undefined undefined
+C: 1 1 2
+D: 1 undefined undefined
+```
+
+答案： `A`
+
+catch 块接收参数 x
+这与变量的 x 不同。这个变量 x 是属于 catch 作用域的
+我们将这个块级作用域的变量设置为 1, 并设置变量 y 的值. 
+现在，我们打印块级作用域的变量 x, 它等于 1
+在 catch 块之外，x 仍然是 undefined，而 y 是 2.

@@ -175,20 +175,24 @@ dom.getBoundingClientRect().widht/height
 
 #### BFC
 
-1.基本概念
+##### 1.基本概念
 英文名, block formatting context, 块级格式化上下文.
 它是一个独立的渲染区域, 里面由块级元素组成.
+MDN: 是块盒子的布局过程发生的区域, 也是浮动元素与其他元素交互的区域.
 
-2.BFC的原理(渲染规则)
-(1) BFC
-(2) BFC 区域不会和 float 元素重叠
-(3) 
-(4) 
+##### 2.BFC的原理(渲染规则)
+- (1) BFC 的元素中, 在垂直方向上的margin会发生重叠(根元素`<html>`就是一个 BFC 元素)
+- (2) BFC 区域不会和 float 元素重叠(两栏自适应)
+- (3) BFC 元素在页面上是一个独立的容器, 外面的元素和里面的元素互不影响
+- (4) 计算 BFC 元素的高度时,里面浮动元素的高度也会参与计算(`overflow:hidden`可以清除浮动)
 
-3.如何创建 BFC
-(1)
-(2)
-(3)
+##### 3.如何创建 BFC
+- (1) float 不为 none
+- (2) position: 不为 static, relative
+- (3) overflow 不为 visible
+- (4) display 为 inline-block, table, table-cell, table-caption
 
 4.BFC 使用场景
-(1) 
+(1) 防止 margin 重叠(塌陷)
+(2) 清除浮动
+(3) 自适应多栏布局的

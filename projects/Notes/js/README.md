@@ -172,13 +172,40 @@ D: ReferenceError
 
 ## DOM
 
+#### DOM 事件级别
+
+DOM事件分为3个级别：DOM0 级事件处理，DOM2 级事件处理和 DOM3 级事件处理
+
+1.DOM0 级别
+```
+el.onclick = function() {}
+```
+
+2.DOM2 级别
+```
+el.addEventListener(event, callback, useCapture)
+```
+
+3.DOM3 级别
+在 DOM2 级事件的基础上添加了更多的事件类型
+
+- UI事件，当用户与页面上的元素交互时触发，如：load、scroll
+- 焦点事件，当元素获得或失去焦点时触发，如：blur、focus
+- 鼠标事件，当用户通过鼠标在页面执行操作时触发如：dblclick、mouseup
+- 滚轮事件，当使用鼠标滚轮或类似设备时触发，如：mousewheel
+- 文本事件，当在文档中输入文本时触发，如：textInput
+- 键盘事件，当用户通过键盘在页面上执行操作时触发，如：keyup、keydown、keypress
+- 合成事件，当为IME（输入法编辑器）输入字符时触发，如：compositionstart
+- 变动事件，当底层DOM结构发生变化时触发，如：DOMsubtreeModified
+- 同时DOM3级事件也允许使用者自定义一些事件
+
 #### Event
 
 ```
 event.preventDefault()  // 例如阻止链接跳转
 event.stopPropagation()
 event.stopImmediatePropagation()  // 阻止事件冒泡, 并且阻止之后相同事件的其他函数执行
-event.currentTarget() // 获取到的是发起事件的标签元素
+event.currentTarget() // 获取到的是绑定事件的标签元素
 event.target()  // 获取的是触发事件的标签元素
 ```
 
@@ -220,7 +247,8 @@ element.addEventListener('click', e => {
 
 ```
 
-1.事件模型
+#### 事件模型
+DOM 事件模型分为捕获和冒泡
 
 #### 事件流
 
@@ -234,7 +262,7 @@ windiw --> document --> html --> body --> ... --> 目标元素
 3.事件冒泡阶段
 
 
-### try catch
+## try catch
 下面代码的输出是什么?
 ```
 (() => {

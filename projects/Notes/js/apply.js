@@ -25,3 +25,12 @@ function myApply(context, arr) {
   delete context.fn
   return result
 }
+
+// ES6
+function myApply2(context, args = []) {
+  context = context || window
+  context.fn = this
+  let result = context.fn(...args)
+  delete context.fn
+  return result
+}

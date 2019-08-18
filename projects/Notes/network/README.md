@@ -82,9 +82,14 @@ window.onhashchange = function () {
 
 窗口A(http:A.com)向跨域的窗口B(http:B.com)发送信息
 ```
-Bwindow.postMessage('data', 'http://B.com');
-// 在窗口B中监听
-Awindow.addEventListener('message', function (event) {
+A
+window.postMessage('data', 'http://B.com');
+```
+
+// 在窗口 B 中监听
+```
+B
+window.addEventListener('message', function (event) {
     console.log(event.origin);
     console.log(event.source);
     console.log(event.data);
@@ -112,6 +117,7 @@ ws.onclose = function (evt) {
 ```
 
 #### CORS
+全称是"跨域资源共享"(Cross-origin resource sharing)
 可以理解为支持 跨域 的 ajax
 
 ```
@@ -124,3 +130,10 @@ fetch('/some/url/', {
 });
 ```
 比如 vue 和 react 中的 axios
+
+
+## 为什么 CORS 可以跨域(原理)？
+
+浏览器一旦发现 AJAX 请求跨源，就会自动添加一些附加的头信息，有时还会多出一次附加的请求，但用户不会有感觉。
+因此，实现 CORS 通信的关键是服务器。
+只要服务器实现了CORS接口，就可以跨源通信。

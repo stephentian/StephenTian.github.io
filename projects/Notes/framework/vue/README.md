@@ -19,3 +19,6 @@ diff 的过程就是不断的调用 `patch` 函数
 `patch` 函数有两种用法,
 `patch(container, vnode)` 和 `patch(vnode, newVnode)`
 `patch` 里的核心逻辑是 `createElement` 和 `updateChildren`
+
+## 生命周期
+

@@ -14,7 +14,8 @@ function debouncd(fn, time = 1000) {
     const context = this
     if (timer) clearTimeout(timer)
     timer = setTimeout(() => {
-      fn(context, args)
+      fn.apply(context, args)
+      timer = null
     }, time)
   }
 }

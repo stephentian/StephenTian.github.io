@@ -12,7 +12,6 @@ vue 就使用了一个 diff 算法, 大大减少了时间.
 特点：
 比较只会在同层级进行, 不会跨层级比较。
 
-
 diff 的过程就是不断的调用 `patch` 函数
 
 `patch` 函数有两个参数, `vnode` 和 `oldVnode`, 也就是新旧两个虚拟节点
@@ -22,3 +21,13 @@ diff 的过程就是不断的调用 `patch` 函数
 
 ## 生命周期
 
+ - beforeCreate
+ - created
+ - beforeMount
+ - mounted
+ - beforeUpdate
+ - updated
+ - beforeDestroy
+ - destroyed
+
+####

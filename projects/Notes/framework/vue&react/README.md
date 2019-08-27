@@ -1,6 +1,5 @@
 # Vue vs React
 
-
 ## MVVM
 
 传统的 MVC：model view controller；
@@ -84,3 +83,44 @@ Vue 也支持组件化，不过是在 MVVM 上的扩展
 如果数据项的顺序被改变，Vue 将不会移动 DOM 元素来匹配数据项的顺序，
 而是简单复用此处每个元素，并且确保它在特定索引下显示已被渲染过的每个元素。
 key的作用主要是为了高效的更新虚拟DOM。
+
+## 虚拟Dom(Virtual Dom)
+
+Virtual Dom 结构：
+```
+// 标签名，属性，孩子节点，render 函数
+
+class Element {
+  constrctor(tagName, attrs, children) {
+    this.tagName = tagName
+    this.attrs = attrs || {}
+    this.children = children || []
+  }
+  render() {
+    // 用来生成真实的 Dom
+  }
+}
+
+```
+
+Virtual Dom 转换成真实 Dom 并添加到网页的过程：
+```
+<ul id="list">
+  <li class="a">1</li>
+  <li>2</li>
+</ul>
+
+// 创建成 Virtual Dom
+let ul = Element('ul', {id: 'list'}, [
+  Element('li', {class: 'a'}, ['1']),
+  Element('li', {}, ['2'])
+])
+
+// 生成真实 Dom
+let ulDom = ul.render()
+
+// 添加到页面中
+document.body.appendChild(ulDom)
+```
+
+## Diff 算法

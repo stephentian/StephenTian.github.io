@@ -124,3 +124,15 @@ document.body.appendChild(ulDom)
 ```
 
 ## Diff 算法
+
+首先，diff 算法也不是前端创造的，比如我日常使用的 `git diff`也是运用了 diff 算法。
+linux 系统里好像也有 diff 命令来比较文件。
+
+vue 和 react 里的 diff 算法有所不同。它们的 diff 算法就是对虚拟节点 Element 进行对比，并返回一个 patchs 对象，用来存储两个节点不同的地方，最后用patchs记录的消息去局部更新Dom。
+
+**注意点：**
+同层比较，如果不同层会直接删掉老的，直接创造一个新的。
+所以官方建议不要进行 DOM 节点跨层级的操作。
+
+不设 key 时，newNode 和 oldNode 只会头尾两端相互比较，
+有 key 时， 还会从 key 生成的的对象找匹配节点，如果有说明只是换了位置。

@@ -28,3 +28,26 @@ function myCall2(context) {
   delete context.fn
   return result
 }
+
+// ES6 
+// function es6Call(context) {
+//   let context = context || window
+//   context.fn = this
+//   let args = [...arguments].slice(1)
+//   const result = context.fn(...args)
+//   delete context.fn
+//   return result
+// }
+
+// function myCall3(context) {
+//   let context = context || window
+//   context.fn = this
+//   let args = []
+//   for (let i = 1; i < arrguments.length; i++) {
+//     let temp = 'arguments[' + i + ']'
+//     args.push(temp)
+//   }
+//   let result = eval('context.fn(' + args + ')')
+//   delete context.fn
+//   return result
+// }

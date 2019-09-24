@@ -19,3 +19,18 @@ function debouncd(fn, time = 1000) {
     }, time)
   }
 }
+
+// function  debounce(fn, time = 500) {
+//   let timer
+//   return function () {
+//     const args = arguments
+//     const context = this
+//     if (timer) {
+//       clearTimeout(timer)
+//     }
+//     timer = setTimeout(() => {
+//       fn.apply(context, args)
+//       timer = null
+//     }, time)
+//   }
+// }

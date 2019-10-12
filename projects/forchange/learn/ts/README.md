@@ -15,6 +15,7 @@
  4. [接口](#接口)
  5. [类](#类)
  6. [函数](#函数)
+ 7. [泛型](#泛型)
 
 ## 类型注解
 
@@ -671,5 +672,235 @@ ts 中， 可以把所有参数收集到一个变量里：
 ```typescript
 function buildName(firstName: string, ...restOfName: strin[]) {
   return firstName + ' ' + restOfName.join(' ')
+}
+
+// 也可以在带有剩余参数的函数类型定义上使用省略号
+let buildNameFunc: (firstName: string, ...rest: string[]) => string = buildName
+```
+
+剩余参数会被当作个数不限的可选参数。可以一个都没有，也可以有任意个。  
+编译器创建参数数组，名字为省略号(`...`)后面的
+
+
+### this
+
+#### this 和箭头函数
+
+```typescript
+let deck = {
+  suits: ['hearts', 'spades', 'clubs'],
+  cards: Array(10),
+  createCardPicker: function() {
+    return function() {
+      return {suit: this.suits[0], card: cards[0]}
+    }
+  }
+}
+
+let cardPicker = deck.createCardPicker();
+let pickedCard = cardPicker();
+
+alert("card: " + pickedCard.card + " of " + pickedCard.suit);
+```
+
+运行后会报错，因为`createCardPicker` 里的 `this` 被设置成了 `window`，而不是`deck`。  
+为了解决这个问题，我可以在函数返回是就绑好正确的 `this`。  
+使用箭头函数， 箭头函数会保存函数创建时的 `this`，而不是调用时的值。
+
+```typescript
+let deck = {
+  suits: ['hearts', 'spades', 'clubs'],
+  cards: Array(10),
+  createCardPicker: function() {
+    return () => {
+      return {suit: this.suits[0], card: cards[0]}
+    }
+  }
+}
+
+let cardPicker = deck.createCardPicker();
+let pickedCard = cardPicker();
+
+alert("card: " + pickedCard.card + " of " + pickedCard.suit);
+```
+
+ts 会警告一个错误。`this` 的类型为 `any`。
+
+#### this 参数
+
+this 参数是个假的参数，出现在参数列表的最前面
+
+```typescript
+function f(this: void) {
+  // ...
+}
+```
+
+往例子里添加一些接口，让类型重用变得更加清晰：
+
+```typescript
+interface Card {
+  suit: string
+  card: number
+}
+interface Deck {
+  suits: string[]
+  cards: number[]
+  createCardPicker(this: Deck): () => Card
+}
+
+let deck: Deck = {
+  suits: ['a', 'b', 'c'],
+  cards: [1, 2, 3, 4]
+  createCardPicker: function(this: Deck) {
+    return () => {
+      return {suit: this.suits[0], card: cards[0]}
+    }
+  }
+}
+
+let cardPicker = deck.createCardPicker()
+let pickedCard = cardPicker()
+alert("card: " + pickedCard.card + " of " + pickedCard.suit);
+```
+
+现在 ts 知道 `createCardPicker` 期望在某个 `Deck` 对象上调用。也就是说 `this` 是 `Deck` 类型，而非 `any`。
+
+### 重载
+
+```typescript
+let suits = ['aa', 'bb', 'ccc', 'dd']
+
+function pickCard(x: { suit: string; card: number }[]): number
+function pickCard(x: number): { suit: string; card: number }
+function pickCard(x): any {
+  if (typeof x == 'object') {
+    let pickedCard = Math.floor(x.length)
+    return pickedCard
+  } else if (typeof x === 'number') {
+    let pickedCard = Math.floor(x/2)
+    return { suit: suits[pickedCard], card: x%2 }
+  }
+}
+
+let myDeck = [{ suit:'diamonds', card: 2}, { suit:'spades', card: 12}]
+let pickedCard1 = myDeck[pickCard(myDeck)];
+alert("card: " + pickedCard1.card + " of " + pickedCard1.suit);
+
+let pickedCard2 = pickCard(15);
+alert("card: " + pickedCard2.card + " of " + pickedCard2.suit);
+```
+
+重载的 `pickCard` 在调用的时候会进行正确的类型检查。
+
+## 泛型
+
+创建使用泛型的第一个例子：identify 函数。
+
+```typescript
+// 不使用泛型
+function identify(arg: number): number {
+  return arg
+}
+
+// 使用泛型
+function identify(arg: any): any {
+  return arg
+}
+```
+
+使用 `any` 类型会可以接收任何类型的 `arg` 参数，这样就会导致一个问题：传入的类型与返回的类型可能不同。  
+因此，需要一种方法使返回值类型和传入参数的类型是相同的。  
+这里，我们使用*类型变量*(`T`)，它是一种特殊的变量，只用于表示类型而不是值。
+
+```typescript
+funciton identify<T>(arg: T): T {
+  return arg
+}
+```
+
+`T` 帮助捕获用户传入的类型。这样就知道传入的参数类型和返回值类型的相同的了。  
+这个版本的 `identify` 函数叫做泛型。  
+
+定义了泛型函数之后，可以使用两种方法使用。  
+第一种是，传入所有参数，包含类型参数。
+
+```typescript
+let output = identify<string>('myString')
+// 指定 T 是 string 类型，并且作为一个参数传给函数
+```
+
+第二种是，类型推论 —— 即编译器会自动帮我们确定 `T` 的类型。
+
+```typescript
+let output = identify('myString')
+```
+
+### 泛型变量
+
+```typescript
+function identify<T> (arg: T): T {
+  console.log(arg.length) // Error: T doesn't have length
+  return arg
+}
+```
+
+编译器会报错, arg 没有 `length` 属性。  
+可以假定操作 `T` 类型的数组：
+
+```typescript
+function identify<T>(arg: T[]): T[] {
+  console.log(arg.length);
+  return arg
+}
+
+// 或
+
+function loggingIdentify<T>(arg: Array<T>): Array<T> {
+  console.log(arg.length);
+  return arg
+}
+```
+
+### 泛型类型
+
+泛型函数类型
+
+```typesctipt
+function identify<T>(arg: T): T {
+  return arg
+}
+
+let myIdentify: <T>(arg: T) => T = identify
+````
+
+也可以使用不同的泛型参数名，只要数量和使用方式上能对应就可以
+
+```typescript
+function identify<T>(arg: T): T { return arg }
+
+let myIdentify: <U>(arg: U) => U = identify
+
+// 使用带有调用签名的对象字面量来定义泛型函数
+let myIdentify: {<T>(arg: T): T} = identify
+```
+
+泛型接口
+
+```typescript
+interface GenericIdentifyFn {
+  <T>(arg: T): T
+}
+
+function identify<T>(arg: T): T {
+  return arg
+}
+
+let myIdentity: GenericIdentifyFn = identify
+
+// 把泛型参数当作整个接口的一个参数
+// 这样就知道具体哪个泛型类型
+interface GenericIdentityFn<T> {
+  (arg: T): T
 }
 ```

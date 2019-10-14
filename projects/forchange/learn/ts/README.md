@@ -400,7 +400,7 @@ let myStr: string = myArray[0]
 **索引签名**: 上面的 StringArray 接口具有索引签名，表示当用 `number` 类型的值去索引 `StringArray` 会得到 `string` 类型的返回值。  
 ts 支持两种索引签名，字符串和数字。
 
-### 类类型
+### 类类型接口
 
 ...
 
@@ -904,3 +904,49 @@ interface GenericIdentityFn<T> {
   (arg: T): T
 }
 ```
+
+泛型类
+
+```typescript
+class GenericNumber<T> {
+  zeroValue: T
+  add: (x: T, y: T) => T
+}
+
+let myGenericNumber = new GenericNumber<number>()
+myGenericNumber.zeroValue = 0;
+myGenericNumber.add = function(x, y) { return x + y; };
+// GenericNumber类的使用十分直观， 没有限制使用 number 类型，也可以使用 string 或者其他类型
+```
+
+### 泛型约束
+
+就像之前约束泛型有 `length` 属性一样，当时的做法是作为 `[]`。但是也有其他类型可能有 `length` 属性。  
+为此，我们定义一个接口来描述约束条件。使用这个接口和 `extends` 关键字进行约束。
+
+```typescript
+interface Lengthwise {
+  length: number
+}
+
+function identity<T extends Lengthwise>（arg: T): T {
+  console.log(arg.length);
+  return arg
+}
+
+// 但是这个泛型别约束死，不再适应其他任意类型：
+identity(3) // Error
+
+// 必须传入符合约束的类型
+identity({ length: 1, value: 3})
+```
+
+在泛型中使用类类型  
+使用泛型创建工厂函数时，需要引用构造函数的类类型
+
+```typescript
+function create<T>(c: { new(): T }): T {
+  return new c()
+}
+```
+

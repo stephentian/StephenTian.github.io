@@ -16,6 +16,7 @@
  5. [类](#类)
  6. [函数](#函数)
  7. [泛型](#泛型)
+ 8. [装饰器](#装饰器)
 
 ## 类型注解
 
@@ -950,3 +951,181 @@ function create<T>(c: { new(): T }): T {
 }
 ```
 
+## 装饰器
+
+在一些场景下我们需要额外的特性来支持标注或修改类及其成员，装饰器(Decorator)为我们在类的声明及
+成员上通过元编程（用代码生成我们需要的代码）语法添加标注提供一种方式。
+
+装饰器是一种特殊类型的声明，它能够被附加到类声明，方法， 访问符，属性或参数上。
+
+装饰器使用 `@exporession` 这种形式， `expression` 求值后必须为一个函数，它会在运行时被调用，被装饰的声明
+信息作为参数传入。
+
+```typescript
+// @sealed Decorator
+function sealed(target) {
+  // do something
+}
+```
+
+### 装饰器工厂
+
+装饰器工厂是一个简单的函数，它返回一个表达式，以供装饰器运行时调用。
+
+```typescript
+function color(value: string) { // 装饰器工厂
+  return function(target) { // 装饰器
+    // ...
+  }
+}
+```
+
+### 装饰器组合
+
+多个装饰器可以同时应用到同一声明上。
+
+```typescript
+// 同一行
+@f @g x
+
+// 书写在多行
+@f
+@g
+x
+```
+
+这样结果执行为 `f(g(x))`。  
+多个装饰器应用在同一声明，会进行如下步骤操作：
+1. 由上至下依次对装饰器表达式求值。
+2. 求值的结果会被当作函数，由下至上执行。
+
+```typescript
+function f() {
+  console.log('f(): evaluated');
+  return function(target, propertyKey: string, descriptor: PropertyDescriptor) {
+    console.log('f(): called');
+  }
+}
+
+function g() {
+  console.log('g(): evaluated');
+  return function(target, propertyKey: string, descriptor: PropertyDescriptor) {
+    console.log('g(): called');
+  }
+}
+
+class C {
+  @f()
+  @g()
+  method() {}
+}
+
+// 打印结果
+// f(): evaluated
+// g(): evaluated
+// f(): called
+// g(): called
+```
+
+### 类装饰器
+
+类装饰器在类声明之前被声明（紧靠着类声明）。类装饰器应用于类构造函数，可以用来监视，修改或替换类定义。 类装饰器不能用在声明文件中( .d.ts)，也不能用在任何外部上下文中（比如declare的类）。
+
+```typescript
+@sealed
+class Greeter {
+  greeting: string
+  constructor(message: string) {
+    this.greeting = message
+  }
+  greet() {
+    return `Hello, ${this.greeting}`
+  }
+}
+
+// 定义装饰器 sealed
+function sealed(constructor: Function) {
+  Object.seal(constructor)
+  Object.seal(constructor.prototype)
+}
+// Object.seal()方法封闭一个对象，阻止添加新属性并将所有现有属性标记为不可配置。
+// 当前属性的值只要可写就可以改变。
+
+// 当 @sealed 被执行的时候，它将密封此类的构造函数和原型。
+```
+
+### 方法装饰器
+
+方法装饰器声明在一个方法的声明之前（紧靠着方法声明）。 它会被应用到方法的 属性描述符上，可以用来监视，修改或者替换方法定义。
+
+方法装饰器表达式会在运行时当作函数被调用，传入下列3个参数：
+
+1. 对于静态成员来说是类的构造函数，对于实例成员是类的原型对象。
+2. 成员的名字
+3. 成员的属性描述符。
+
+```typescript
+class Greeter {
+  greeting: string
+  constructor(message: string) {
+    this.greeting = message
+  }
+  @enumerable(false)
+  greet() {
+    return `Hello, ${this.greeting}`
+  }
+}
+
+// @enumerable 装饰器
+function enumerable(value: boolean) {
+  return function(target: any, propertyKey: string, descriptor: PropertyDescriptor) {
+    descriptor.enumerable = value
+  }
+}
+// 这里的@enumerable(false)是一个装饰器工厂。
+// 当装饰器 @enumerable(false)被调用时，它会修改属性描述符的enumerable属性。
+```
+
+### 属性装饰器
+
+属性装饰器表达式会在运行时当作函数被调用，传入下列2个参数：  
+
+1. 对于静态成员来说是类的构造函数，对于实例成员是类的原型对象。
+2. 成员的名字。
+
+```typescript
+class Greeter {
+  @format('Hello, %s')
+  greeting: string
+  constructor(message: string) {
+    this.greeting = message
+  }
+  greet() {
+    let formatString = getFormat(this, "greeting");
+    return formatString.replace("%s", this.greeting);
+  }
+}
+
+// @format
+import 'reflect-metadata'
+const formatMetadataKey = Symbol('format')
+function format(formatString: string) {
+  return Reflect.metadata(formatMetadataKey, formatString)
+}
+
+// getFormat
+function getFormat(target: any, propertyKey: string) {
+  return Reflect.getMetadata(formatMetadataKey, target, propertyKey)
+}
+```
+
+### 参数装饰器
+
+ 参数装饰器应用于类构造函数或方法声明。 参数装饰器不能用在声明文件（.d.ts），重载或其它外部上下文（比如 declare的类）里。  
+参数装饰器表达式会在运行时当作函数被调用，传入下列3个参数：
+
+1. 对于静态成员来说是类的构造函数，对于实例成员是类的原型对象。
+2. 成员的名字。
+3. 参数在函数参数列表中的索引。
+
+**注意**  参数装饰器只能用来监视一个方法的参数是否被传入。

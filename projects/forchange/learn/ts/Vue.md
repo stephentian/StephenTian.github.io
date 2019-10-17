@@ -133,6 +133,55 @@ declare module "*.vue" {
 }
 ```
 
+### 配置 webpack
+
+`vue-cli3.0` 之前的版本，在 `build` 文件夹找相关文件。  
+在文件夹中找到 `webpack.base.conf.js` 文件，顺便把 `src` 文件夹的 `main.js` 改为 `main.ts`。
+
+```typescript
+entry: {
+  app: './src/main.ts'
+}
+```
+
+修改文件中的 `resolve.extensions`
+
+```typescript
+resolve: {
+    extensions: ['.js', '.ts', '.vue', '.json'],
+    alias: {
+      '@': resolve('src'),
+      '@lib': resolve('src/lib'),
+      '@modules': resolve('src/modules'),
+      '@style': resolve('src/style'),
+      '@component': resolve('src/components')
+    }
+  }
+```
+
+修改 `module.rules`, 添加对 `ts` 的解析
+
+```typescript
+module: {
+    rules: [
+      {
+        test: /\.ts$/,
+        exclude: /node_modules/,
+        enforce: 'pre',
+        loader: 'tslint-loader'
+      },
+      {
+        test: /\.tsx?$/,
+        loader: 'ts-loader',
+        exclude: /node_modules/,
+        options: {
+          appendTsSuffixTo: [/\.vue$/],
+        }
+      },
+    ]
+},
+```
+
 ### 改造 .vue 文件
 
 1. `<script>` 标签添加 `lang="ts"` 声明。

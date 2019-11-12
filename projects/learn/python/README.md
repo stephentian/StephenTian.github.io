@@ -1,5 +1,11 @@
 # python
 
+## python 是什么
+
+官网的介绍: `Python is a programming language that lets you work quickly and integrate systems more effectively.`
+
+我个人也是这样认为的，可能这就是开发者的共鸣吧(滑稽).
+
 ## 为什么学习 python
 
 - 首先当然是工作需求, 或者项目需求, 赚钱, 完成上级要求.

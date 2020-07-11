@@ -52,3 +52,25 @@ var removeElement = function(nums, val) {
   return index
 };
 ```
+
+### 答案二
+
+双指针
+
+Runtime: 104 ms, faster than 6.65% of JavaScript online submissions for Remove Element.
+Memory Usage: 33.2 MB, less than 97.68% of JavaScript online submissions for Remove Element.
+
+```
+var removeElement = function(nums, val) {
+  let index = 0, last = nums.length - 1
+  while (index <= last) {
+    if (nums[index] === val) {
+      nums[index] = nums[last]
+      last--
+    } else {
+      index++
+    }
+  }
+  return index
+};
+```

@@ -74,3 +74,20 @@ var removeElement = function(nums, val) {
   return index
 };
 ```
+
+### 答案三
+
+Runtime: 108 ms, faster than 6.65% of JavaScript online submissions for Remove Element.
+Memory Usage: 33.3 MB, less than 96.40% of JavaScript online submissions for Remove Element.
+
+```
+var removeElement = function(nums, val) {
+    for (let  i = 0; i < nums.length; i ++) {
+        if (nums[i] === val) {
+            nums.splice(i, 1)
+            i--
+        }
+    }
+  return nums.length
+};
+```

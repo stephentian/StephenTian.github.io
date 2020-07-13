@@ -91,3 +91,14 @@ var removeElement = function(nums, val) {
   return nums.length
 };
 ```
+
+### 答案四
+
+```
+var removeElement = (nums, val) => {
+  while (nums.indexOf(val) !== -1) {
+    nums.splice(nums.indexOf(val),1)
+  }
+  return nums.length
+}
+```

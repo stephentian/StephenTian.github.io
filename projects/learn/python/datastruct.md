@@ -60,3 +60,22 @@ e.g. {'length': 120, 'width': 120}
 # 字典
 {key:value for i in xxxx}
 ```
+
+### 文件的内建函数
+
+```python
+open()
+  open('filename', encoding="编码1格式")
+  open('filename', 'w')
+read()
+readline()
+seek()
+write()
+cloe()
+```
+
+#### 文件常用操作
+
+```python
+seek()
+```

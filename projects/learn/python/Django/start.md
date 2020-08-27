@@ -16,3 +16,11 @@ T: Template 页面展示 html
 
 每个项目依赖的 Django 版本可能不同，所以一般不把 Django 装在本地环境，或者说根目录。  
 而在项目开发的虚拟环境里安装。
+
+```shell
+pip install django
+
+// 进入虚拟环境后, 创建项目
+
+djang-admin startproject project-name(项目名)
+```

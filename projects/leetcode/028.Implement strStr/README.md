@@ -1,4 +1,4 @@
-# Im
+# Implement strSTR
 
 > 实现 strStr()
 
@@ -13,13 +13,9 @@
  * @return {number}
  */
 var strStr = function(haystack, needle) {
-    if(needle.length === 0) return 0
-    let len1 = haystack.length
-    let len2 = needle.length
-    if (len1 < len2) return -1
-
-    for (let i = 0; i < len1 - len2; i ++) {
-
+    for (var i = 0; i <= haystack.length - needle.length; i++) {
+        if (haystack.substr(i, needle.length) === needle) return i
     }
+    return -1
 };
 ```

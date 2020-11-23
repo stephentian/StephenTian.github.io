@@ -6,21 +6,25 @@
 
 ### 答案一
 
-```
+利用 substr
+
+```js
 /**
  * @param {string} haystack
  * @param {string} needle
  * @return {number}
  */
-var strStr = function(haystack, needle) {
-    for (var i = 0; i <= haystack.length - needle.length; i++) {
-        if (haystack.substr(i, needle.length) === needle) return i
-    }
-    return -1
-};
+var strStr = function (haystack, needle) {
+  for (var i = 0; i <= haystack.length - needle.length; i++) {
+    if (haystack.substr(i, needle.length) === needle) return i
+  }
+  return -1
+}
 ```
 
 ### 答案二
+
+暴力法
 
 ```javascript
 var strStr = function (haystack, needle) {
@@ -38,5 +42,15 @@ var strStr = function (haystack, needle) {
     }
   }
   return -1
+}
+```
+
+### 答案三
+
+js 的 indexOf 方法
+
+```js
+var strStr = function (haystack, needle) {
+  return haystack.indexOf(needle)
 }
 ```

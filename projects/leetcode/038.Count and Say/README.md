@@ -27,3 +27,27 @@ var countAndSay = function (n) {
   return cur
 }
 ```
+
+### 答案二
+
+双指针
+
+```js
+var countAndSay = function (n) {
+  if (n === 1) return '1'
+
+  let pre = countAndSay(n - 1)
+  let length = pre.length
+  let start = 0
+  let result = ''
+
+  for (let i = 1; i <= length; i++) {
+    if (pre[i] === pre[start]) {
+      continue
+    } else {
+      result += (i - start).toString() + pre[start]
+    }
+  }
+  return result
+}
+```

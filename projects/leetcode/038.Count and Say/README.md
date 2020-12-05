@@ -31,6 +31,8 @@ var countAndSay = function (n) {
 ### 答案二
 
 双指针
+执行用时：104 m, 在所有 JavaScript 提交中击败了 15.19%的用户
+内存消耗：40.1 MB, 在所有 JavaScript 提交中击败了 33.56%的用户
 
 ```js
 var countAndSay = function (n) {
@@ -46,6 +48,7 @@ var countAndSay = function (n) {
       continue
     } else {
       result += (i - start).toString() + pre[start]
+      start = i
     }
   }
   return result

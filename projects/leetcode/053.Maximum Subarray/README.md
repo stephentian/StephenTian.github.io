@@ -31,3 +31,26 @@ var maxSubArray = function (nums) {
   return sum
 }
 ```
+
+### 答案二
+
+动态规划
+
+执行用时：92 ms, 在所有 JavaScript 提交中击败了 54.25%的用户
+内存消耗：39.7 MB, 在所有 JavaScript 提交中击败了 8.87%的用户
+
+```js
+var maxSubArray = function (nums) {
+  let res = nums[0]
+  let sum = 0
+  for (const num of nums) {
+    if (sum > 0) {
+      sum += num
+    } else {
+      sum = num
+    }
+    res = Math.max(res, sum)
+  }
+  return res
+}
+```

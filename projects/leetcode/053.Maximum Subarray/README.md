@@ -53,4 +53,14 @@ var maxSubArray = function (nums) {
   }
   return res
 }
+
+var maxSubArray = function (nums) {
+  let res = nums[0]
+  let sum = nums[0]
+  for (let i = 1; < nums.length; i++) {
+    pre = Math.max(pre + nums[i], nums[i])
+    res = Math.max(pre, res)
+  }
+  return res
+}
 ```

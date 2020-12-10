@@ -64,3 +64,22 @@ var maxSubArray = function (nums) {
   return res
 }
 ```
+
+### 答案三
+
+贪心算法
+
+执行用时：80 ms, 在所有 JavaScript 提交中击败了 93.61%的用户
+内存消耗：39.4 MB, 在所有 JavaScript 提交中击败了 27.44%的用户
+
+```js
+var maxSubArray = function (nums) {
+  let res = nums[0]
+  let sum = 0
+  nums.forEach(num => {
+    sum = sum + num > num ? sum + num : num
+    res = sum > res ? sum : res
+  })
+  return res
+}
+```

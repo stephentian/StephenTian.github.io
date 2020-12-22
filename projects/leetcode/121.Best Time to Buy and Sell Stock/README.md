@@ -23,3 +23,27 @@ var maxProfit = function (prices) {
   return maxProfit
 }
 ```
+
+### 答案二
+
+双指针
+
+执行用时：84 ms, 在所有 JavaScript 提交中击败了 84.91%的用户
+
+内存消耗：39.3 MB, 在所有 JavaScript 提交中击败了 66.96%的用户
+
+```js
+var maxProfit = function (prices) {
+  let maxProfit = 0
+  let i = 0
+  let j = 0
+  for (; j < prices.length; j++) {
+    if (prices[j] < prices[i]) {
+      i = j
+    } else {
+      maxProfit = Math.max(maxProfit, prices[j] - prices[i])
+    }
+  }
+  return maxProfit
+}
+```

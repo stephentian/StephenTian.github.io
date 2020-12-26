@@ -12,10 +12,8 @@ var findDisappearedNumbers = function (nums) {
   if (!length) {
     return []
   }
-
   const map = {}
   nums.forEach(num => (map[num] = true))
-
   const res = []
   for (let i = 1; i <= length; ++i) {
     if (!map[i]) res.push(i)

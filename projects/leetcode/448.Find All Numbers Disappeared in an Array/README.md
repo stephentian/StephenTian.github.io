@@ -6,6 +6,10 @@
 
 ### 答案一
 
+执行用时：128 ms, 在所有 JavaScript 提交中击败了 80.03%的用户
+
+内存消耗：48.8 MB, 在所有 JavaScript 提交中击败了 25.19%的用户
+
 ```js
 var findDisappearedNumbers = function (nums) {
   const length = nums.length

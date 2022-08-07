@@ -48,5 +48,6 @@ export default {
 
   generate: {
     dir: 'docs',
+    subFolder: false,
   },
 }
